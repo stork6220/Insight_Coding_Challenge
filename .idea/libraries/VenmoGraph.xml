@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="VenmoGraph">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/VenmoGraph.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
