@@ -51,14 +51,7 @@ public class Calculator {
                 left.add(right.pollFirst());
             }
         } else {
-            node.setDegree(node.getDegree() + 1);
-            // Do the following operations otherwise the TreeSet in Java would not update by itself
-            if (!left.isEmpty()) {
-                left.add(left.pollLast());
-            }
-            if (!right.isEmpty()) {
-                right.add(right.pollFirst());
-            }
+            updateNode(node, node.getDegree() + 1);
         }
         if (!left.isEmpty() && !right.isEmpty() && left.last().compareTo(right.first()) > 0) {
             right.add(left.pollLast());
@@ -89,18 +82,22 @@ public class Calculator {
             }
             lookupMap.remove(user);
         } else {
-            node.setDegree(node.getDegree() - 1);
-            // Do the following operations otherwise the TreeSet in Java would not update by itself
-            if (!left.isEmpty()) {
-                left.add(left.pollLast());
-            }
-            if (!right.isEmpty()) {
-                right.add(right.pollFirst());
-            }
+            updateNode(node, node.getDegree() - 1);
         }
         if (!left.isEmpty() && !right.isEmpty() && left.last().compareTo(right.first()) > 0) {
             right.add(left.pollLast());
             left.add(right.pollFirst());
+        }
+    }
+
+    // Update node degree. Java would not automatically update the TreeSet by just changing degrees
+    private void updateNode(CalcNode node, int newDegree) {
+        if (left.remove(node)) {
+            node.setDegree(newDegree);
+            left.add(node);
+        } else if (right.remove(node)) {
+            node.setDegree(newDegree);
+            right.add(node);
         }
     }
 
