@@ -34,7 +34,7 @@ public class PaymentReader {
                     String target = (String) json.getString("target");
                     String createdTime = (String) json.get("created_time");
                     createdTime = createdTime.replace("T", " ").replace("Z", "");
-                    if (actor.equals("") || target.equals("") || createdTime.equals("")) { // clean up the invalid data
+                    if (actor.equals("") || target.equals("") || createdTime.equals("") || actor.compareTo(target) == 0) { // clean up the invalid data
                         continue;
                     }
                     List<String> output = Arrays.asList(actor, target, createdTime);
